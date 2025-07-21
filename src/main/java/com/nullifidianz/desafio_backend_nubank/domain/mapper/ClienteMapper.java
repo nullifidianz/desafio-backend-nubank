@@ -59,4 +59,20 @@ public class ClienteMapper {
                 cliente.getDocumento(), contatos);
     }
 
+    public ContatoDTO toContatoDTO(Contato contato) {
+        if (contato == null) {
+            return null;
+        }
+        return new ContatoDTO(contato.getTelefone(), contato.getEmail());
+    }
+
+    public List<ContatoDTO> toContatoDTOList(List<Contato> contatos) {
+        if (contatos == null) {
+            return List.of();
+        }
+        return contatos.stream()
+                .map(this::toContatoDTO)
+                .toList();
+    }
+
 }

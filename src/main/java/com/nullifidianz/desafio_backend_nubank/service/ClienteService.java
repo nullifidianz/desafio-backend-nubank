@@ -28,13 +28,13 @@ public class ClienteService {
         return clienteMapper.toResponse(cliente);
     }
 
-    public List<ClienteResponse> listarTodosClientes(ClienteResponse response) {
+    public List<ClienteResponse> listarTodosClientes() {
         return clienteRepository.findAll().stream().map(clienteMapper::toResponse).toList();
     }
 
     public List<ContatoDTO> listarContatos(Long id){
         Cliente cliente = clienteRepository.findById(id).orElseThrow(() -> new RuntimeException("Id não encontrado"));
-        return cliente.getContatos().stream().map(contato -> new ContatoDTO(contato.getTelefone(), contato.getEmail())).toList();
+        return clienteMapper.toContatoDTOList(cliente.getContatos());
     }
 
 
