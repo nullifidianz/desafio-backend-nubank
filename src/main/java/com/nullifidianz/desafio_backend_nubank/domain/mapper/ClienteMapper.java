@@ -35,6 +35,14 @@ public class ClienteMapper {
         return cliente;
     }
 
+    public Contato toEntity(ContatoDTO dto, Cliente cliente){
+        Contato contato  = new Contato();
+        contato.setTelefone(dto.telefone());
+        contato.setEmail(dto.email());
+        contato.setCliente(cliente);
+        return contato;
+    }
+
     public ClienteResponse toResponse(Cliente cliente) {
         List<ContatoDTO> contatos;
 
@@ -50,4 +58,5 @@ public class ClienteMapper {
         return new ClienteResponse(cliente.getId(), cliente.getNome(), cliente.getDataNascimento(),
                 cliente.getDocumento(), contatos);
     }
+
 }
